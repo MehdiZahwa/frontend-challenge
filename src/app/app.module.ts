@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NoPageFoundComponent } from './shared/no-page-found/no-page-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NoPageFoundComponent
   ],
   imports: [
     BrowserModule,
