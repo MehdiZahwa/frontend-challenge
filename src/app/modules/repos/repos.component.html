@@ -1,32 +1,30 @@
-<div class="new-container">
+<div class="new-container" infinite-scroll (scrolled)="onScrollDown()">
   {{sysDate | date:'y-'+sysDate.getMonth()+'-d'}}
-
-  <mat-grid-list cols="4" rowHeight="100px">
+  {{sysDate}}
+  <mat-grid-list *ngFor="let repo of totalRepositories" cols="4" rowHeight="100px">
 
     <mat-grid-tile colspan="1" rowspan="2" style.background="lightblue">
-      <img id="avatar" src="https://material.angular.io/assets/img/examples/shiba2.jpg" />
+      <img id="avatar" [src]="repo.owner.avatar_url" />
     </mat-grid-tile>
 
 
     <mat-grid-tile colspan=" 3" rowspan="1" style.background="lightblue">
-      repo name <br> description
+      {{repo.name}} <br> {{repo.description}}
     </mat-grid-tile>
 
     <mat-grid-tile colspan="1" rowspan="1" style.background="lightblue">
-      nb of stars
+      {{repo.stargazers_count}}
     </mat-grid-tile>
 
 
     <mat-grid-tile colspan="1" rowspan="1" style.background="lightblue">
-      nb of issue
+      {{repo.open_issues_count}}
     </mat-grid-tile>
 
     <mat-grid-tile colspan="1" rowspan="1" style.background="lightblue">
-      submitted 30 days ago by flan
+      submitted {{calculateDateDiff(repo.created_at)}} days ago by {{repo.owner.login}}
     </mat-grid-tile>
 
   </mat-grid-list>
-
-
 
 </div>

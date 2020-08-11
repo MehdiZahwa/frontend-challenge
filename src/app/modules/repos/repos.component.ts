@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReposService } from 'src/app/services/repos.service';
+import { Repository } from 'src/app/models/repository';
+import { Result } from 'src/app/models/result';
 
 @Component({
   selector: 'app-repos',
@@ -9,6 +11,11 @@ import { ReposService } from 'src/app/services/repos.service';
 export class ReposComponent implements OnInit {
   sysDate = new Date();
   lastMonth: string;
+  jsonResult: Result;
+  repositories: Array<Repository> = [];
+  totalRepositories: Array<Repository> = [];
+
+  pageNumber: number = 1;
 
   constructor(private reposService: ReposService) {}
 
@@ -24,11 +31,29 @@ export class ReposComponent implements OnInit {
     //console.log(this.sysDate.getMonth().toString());
     //console.log(this.sysDate.getFullYear().toString());
     //console.log(this.sysDate.getDate().toString());
+    setInterval(() => {
+      this.sysDate = new Date();
+    }, 1);
   }
 
   getRecentRepos(date: string, page?: number) {
-    this.reposService.getRecentRepos(date).subscribe((value) => {
-      console.log(value);
+    this.reposService.getRecentRepos(date, page).subscribe((value) => {
+      this.jsonResult = value;
+      this.jsonResult.items.forEach((item) => {
+        this.totalRepositories.push(item);
+      });
     });
+  }
+
+  calculateDateDiff(submitDate: Date) {
+    submitDate = new Date(submitDate);
+    return Math.floor(
+      (this.sysDate.getTime() - submitDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
+  }
+
+  onScrollDown() {
+    console.log('scrolled !');
+    this.getRecentRepos(this.lastMonth, ++this.pageNumber);
   }
 }
