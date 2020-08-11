@@ -10,37 +10,34 @@ import { Result } from 'src/app/models/result';
 })
 export class ReposComponent implements OnInit {
   sysDate = new Date();
-  lastMonth: string;
+  lastMonthDate: string;
   jsonResult: Result;
   repositories: Array<Repository> = [];
-  totalRepositories: Array<Repository> = [];
 
   pageNumber: number = 1;
 
   constructor(private reposService: ReposService) {}
 
   ngOnInit(): void {
-    this.lastMonth =
+    this.lastMonthDate =
       this.sysDate.getFullYear().toString() +
       '-0' +
       this.sysDate.getMonth().toString() +
       '-' +
       this.sysDate.getDate().toString();
-    //console.log(this.lastMonth);
-    console.log(this.getRecentRepos(this.lastMonth));
-    //console.log(this.sysDate.getMonth().toString());
-    //console.log(this.sysDate.getFullYear().toString());
-    //console.log(this.sysDate.getDate().toString());
+
+    this.getRecentRepos(this.lastMonthDate);
+
     setInterval(() => {
       this.sysDate = new Date();
     }, 1);
   }
 
-  getRecentRepos(date: string, page?: number) {
+  getRecentRepos(date: string, page = 1) {
     this.reposService.getRecentRepos(date, page).subscribe((value) => {
       this.jsonResult = value;
       this.jsonResult.items.forEach((item) => {
-        this.totalRepositories.push(item);
+        this.repositories.push(item);
       });
     });
   }
@@ -54,6 +51,6 @@ export class ReposComponent implements OnInit {
 
   onScrollDown() {
     console.log('scrolled !');
-    this.getRecentRepos(this.lastMonth, ++this.pageNumber);
+    this.getRecentRepos(this.lastMonthDate, ++this.pageNumber);
   }
 }

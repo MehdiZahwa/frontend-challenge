@@ -1,7 +1,6 @@
 <div class="new-container" infinite-scroll (scrolled)="onScrollDown()">
-  {{sysDate | date:'y-'+sysDate.getMonth()+'-d'}}
-  {{sysDate}}
-  <mat-grid-list *ngFor="let repo of totalRepositories" cols="4" rowHeight="100px">
+
+  <mat-grid-list *ngFor="let repo of repositories" cols="4" rowHeight="100px">
 
     <mat-grid-tile colspan="1" rowspan="2" style.background="lightblue">
       <img id="avatar" [src]="repo.owner.avatar_url" />

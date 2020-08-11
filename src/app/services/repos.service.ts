@@ -21,18 +21,8 @@ export class ReposService {
   constructor(private httpClient: HttpClient) {}
 
   getRecentRepos(createdAfter: string, pageNumber?: number): Observable<any> {
-    pageNumber = pageNumber ? pageNumber : 1;
-    console.log(
-      environment.apiUrl +
-        this.searchRepoEndPoint +
-        this.query +
-        createdAfter +
-        this.params +
-        this.pageParam +
-        pageNumber
-    );
     return this.httpClient.get<any>(
-      environment.apiUrl +
+      environment.searchApi +
         this.searchRepoEndPoint +
         this.query +
         createdAfter +
