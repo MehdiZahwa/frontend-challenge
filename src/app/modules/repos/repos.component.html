@@ -1,5 +1,9 @@
+<div class="general-description">
+  <h1>Trending</h1>
+  <p> See what the GitHub community is most excited about this month. </p>
+</div>
 <div class="new-container" infinite-scroll (scrolled)="onScrollDown()">
-  <mat-grid-list *ngFor="let repo of repositories" cols="8" rowHeight="60px" style="margin: 1em;">
+  <mat-grid-list *ngFor="let repo of repositories" cols="8" rowHeight="60px">
     <div class="grid-container">
 
       <mat-grid-tile colspan="1" rowspan="3" class="avatar-container">
@@ -9,7 +13,7 @@
       </mat-grid-tile>
 
 
-      <mat-grid-tile colspan="7" rowspan="1" class="tr-border-rotation">
+      <mat-grid-tile colspan="7" rowspan="1" class="top-right-border-rotate">
 
         <div class="repo-name">
           <span><strong>{{repo.name}}</strong></span>
@@ -20,7 +24,7 @@
       <mat-grid-tile colspan="7" rowspan="1">
 
         <div>
-          <span>{{repo.description}}</span>
+          <p>{{repo.description}}</p>
         </div>
 
       </mat-grid-tile>
@@ -42,7 +46,7 @@
         </mat-chip-list>
       </mat-grid-tile>
 
-      <mat-grid-tile class="br-border-rotation" colspan="5" rowspan="1">
+      <mat-grid-tile class="bottom-right-border-rotate" colspan="5" rowspan="1">
         <div>
           submitted {{calculateDateDiff(repo.created_at)}} days ago by <strong> {{repo.owner.login}}</strong>
         </div>

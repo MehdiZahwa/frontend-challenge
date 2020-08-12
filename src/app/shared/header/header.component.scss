@@ -1,11 +1,13 @@
-$primary: rgb(230, 184, 0);
+$primary: #6050dc;
 
 body {
   margin: 0;
   font-size: 18px;
 }
-span {
-  margin-left: 20em;
+div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .container {
   color: white;
@@ -15,15 +17,17 @@ span {
 
 header {
   background: $primary;
-  padding: 1em 0;
 
   a {
+    display: flex;
+    align-items: center;
     color: white;
     text-decoration: none;
   }
 
-  a.logo {
+  img.logo {
     font-weight: bold;
+    max-width: 3vw;
   }
   nav {
     float: right;

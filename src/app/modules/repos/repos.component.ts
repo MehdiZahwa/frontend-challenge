@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReposService } from 'src/app/services/repos.service';
 import { Repository } from 'src/app/models/repository';
 import { Result } from 'src/app/models/result';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-repos',
@@ -13,19 +14,16 @@ export class ReposComponent implements OnInit {
   lastMonthDate: string;
   jsonResult: Result;
   repositories: Array<Repository> = [];
-
   pageNumber: number = 1;
 
   constructor(private reposService: ReposService) {}
 
   ngOnInit(): void {
-    this.lastMonthDate =
-      this.sysDate.getFullYear().toString() +
-      '-0' +
-      this.sysDate.getMonth().toString() +
-      '-' +
-      this.sysDate.getDate().toString();
-
+    this.lastMonthDate = formatDate(
+      this.sysDate.setMonth(this.sysDate.getUTCMonth() - 1),
+      'y-MM-dd',
+      'en'
+    );
     this.getRecentRepos(this.lastMonthDate);
 
     setInterval(() => {
@@ -52,7 +50,6 @@ export class ReposComponent implements OnInit {
   }
 
   onScrollDown() {
-    console.log('scrolled !');
     this.getRecentRepos(this.lastMonthDate, ++this.pageNumber);
   }
 }
