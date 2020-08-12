@@ -1,7 +1,46 @@
 .new-container {
-  margin: 1em;
+  margin: 2em;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
+.grid-container {
+  margin: 3em;
+}
+.avatar-container {
+  border-top-left-radius: 3vh;
+  border-bottom-left-radius: 3vh;
+  div {
+    left: auto;
+  }
+}
 #avatar {
-  max-height: 50vh;
+  max-height: 20vh;
+  max-width: 20vw;
+  border-radius: 100%;
+}
+mat-grid-tile {
+  overflow: auto;
+  background-color: white;
+  div {
+    position: absolute;
+    left: 0;
+    margin-left: 2%;
+  }
+}
+
+.repo-name {
+  font-size: x-large;
+  border-bottom-right-radius: 3vh;
+}
+
+mat-chip {
+  font-weight: bold;
+}
+
+.br-border-rotation {
+  border-bottom-right-radius: 3vh;
+}
+
+.tr-border-rotation {
+  border-top-right-radius: 3vh;
 }

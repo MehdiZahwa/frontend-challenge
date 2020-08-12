@@ -1,29 +1,53 @@
 <div class="new-container" infinite-scroll (scrolled)="onScrollDown()">
+  <mat-grid-list *ngFor="let repo of repositories" cols="8" rowHeight="60px" style="margin: 1em;">
+    <div class="grid-container">
 
-  <mat-grid-list *ngFor="let repo of repositories" cols="4" rowHeight="100px">
-
-    <mat-grid-tile colspan="1" rowspan="2" style.background="lightblue">
-      <img id="avatar" [src]="repo.owner.avatar_url" />
-    </mat-grid-tile>
-
-
-    <mat-grid-tile colspan=" 3" rowspan="1" style.background="lightblue">
-      {{repo.name}} <br> {{repo.description}}
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="1" rowspan="1" style.background="lightblue">
-      {{repo.stargazers_count}}
-    </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="3" class="avatar-container">
+        <div>
+          <img id="avatar" [src]="repo.owner.avatar_url" />
+        </div>
+      </mat-grid-tile>
 
 
-    <mat-grid-tile colspan="1" rowspan="1" style.background="lightblue">
-      {{repo.open_issues_count}}
-    </mat-grid-tile>
+      <mat-grid-tile colspan="7" rowspan="1" class="tr-border-rotation">
 
-    <mat-grid-tile colspan="1" rowspan="1" style.background="lightblue">
-      submitted {{calculateDateDiff(repo.created_at)}} days ago by {{repo.owner.login}}
-    </mat-grid-tile>
+        <div class="repo-name">
+          <span><strong>{{repo.name}}</strong></span>
+        </div>
 
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="7" rowspan="1">
+
+        <div>
+          <span>{{repo.description}}</span>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-chip-list>
+          <mat-chip>
+            Stars: {{repo.stargazers_count | shortNumber: 2 }}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-chip-list>
+          <mat-chip>
+            Issues: {{repo.open_issues_count | shortNumber: 2}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="br-border-rotation" colspan="5" rowspan="1">
+        <div>
+          submitted {{calculateDateDiff(repo.created_at)}} days ago by <strong> {{repo.owner.login}}</strong>
+        </div>
+      </mat-grid-tile>
+
+    </div>
   </mat-grid-list>
-
 </div>

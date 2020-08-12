@@ -35,10 +35,12 @@ export class ReposComponent implements OnInit {
 
   getRecentRepos(date: string, page = 1) {
     this.reposService.getRecentRepos(date, page).subscribe((value) => {
-      this.jsonResult = value;
-      this.jsonResult.items.forEach((item) => {
-        this.repositories.push(item);
-      });
+      if (value) {
+        this.jsonResult = value;
+        this.jsonResult.items.forEach((item) => {
+          this.repositories.push(item);
+        });
+      }
     });
   }
 
